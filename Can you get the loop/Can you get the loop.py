@@ -21,11 +21,30 @@ by 1 step and slow by 1 step. And finally they will meet at the starting point o
 
 
 
+
+
 def loop_size(node):
     if node is None:
         raise Exception()
-    if node == node.next:
-        return 1
     if node.next is None or node.next.next is None:
         return 0
-        
+    
+    slow = node.next
+    fast = node.next.next
+    
+    while slow != fast:
+        slow = slow.next
+        fast = fast.next.next
+    
+    check_point = fast
+    slow = node
+    
+    loop_len = 0
+    
+    while slow != check_point:
+        loop_len += 1
+        slow = slow.next
+        check_point = check_point.next
+    
+    return loop_len
+
