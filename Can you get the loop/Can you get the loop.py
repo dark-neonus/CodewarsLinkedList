@@ -23,28 +23,34 @@ by 1 step and slow by 1 step. And finally they will meet at the starting point o
 
 
 
+
+
 def loop_size(node):
     if node is None:
         raise Exception()
-    if node.next is None or node.next.next is None:
-        return 0
-    
-    slow = node.next
-    fast = node.next.next
-    
-    while slow != fast:
+    slow = node
+    fast = node
+
+    # Find intersection of slow and fast
+    while slow is not None and fast is not None:
         slow = slow.next
         fast = fast.next.next
-    
-    check_point = fast
-    slow = node
-    
-    loop_len = 0
-    
-    while slow != check_point:
-        loop_len += 1
-        slow = slow.next
-        check_point = check_point.next
-    
-    return loop_len
 
+        if slow == fast:
+            slow = node
+
+            # find start of loop
+            while slow != fast:
+                slow = slow.next
+                fast = fast.next
+
+            fast = fast.next
+            loop_len = 1
+
+            while fast != slow:
+                fast = fast.next
+                loop_len += 1
+
+            return loop_len
+
+    return 0
