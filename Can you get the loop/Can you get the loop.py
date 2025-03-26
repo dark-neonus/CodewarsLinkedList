@@ -19,12 +19,6 @@ So to find the starting point. When they meet, point start to head again, and mo
 by 1 step and slow by 1 step. And finally they will meet at the starting point of cycle.
 """
 
-
-
-
-
-
-
 def loop_size(node):
     if node is None:
         raise Exception()
